@@ -9,17 +9,17 @@ export class AppController {
     @Query('limit') limit: string,
   ) {
     try {
-      const selectedCountry = country || 'ph'; // Default to 'ph' for the Philippines
-      const articleLimit = parseInt(limit, 10) || 1; // Default to 5 articles if no limit provided
+      const selectedCountry = country || 'ph'; 
+      const articleLimit = parseInt(limit, 10) || 1; 
 
       const response = await axios.get(
-        'http://localhost:3000/api/headlines', // Updated to use a known working endpoint
+        'http://localhost:3000/api/headlines', 
         {
           params: {
-            apiKey: '2d504ef974176296de39be6496a611e2', // Replace with your actual API key
-            country: selectedCountry, // Set country to Philippines (ph)
-            pageSize: articleLimit, // Limit the number of articles
-            language: 'en', // Ensure articles are in English
+            apiKey: '2d504ef974176296de39be6496a611e2', 
+            country: selectedCountry, 
+            pageSize: articleLimit, 
+            language: 'en', 
           },
         },
       );
