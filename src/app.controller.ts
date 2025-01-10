@@ -1,12 +1,41 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import axios from 'axios';
 
-@Controller()
+@Controller('api')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  @Get('headlines')
+  async getHeadlines() {
+    try {
+      const response = await axios.get(
+        'https://gnews.io/api/v4/top-headlines', // GNews API endpoint
+        {
+          params: {
+            token: '2d504ef974176296de39be6496a611e2', // Your GNews API key
+            lang: 'en', // Language preference
+            country: 'ph', // Mandatory: News from the Philippines
+          },
+        },
+      );
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+      // Extract articles from the response
+      const articles = response.data.articles.map((article: any) => ({
+        TITLE: article.title,
+        DESCRIPTION: article.description,
+        CONTENT: article.content,
+        URL: article.url,
+        IMAGE: article.image,
+        'PUBLISHED AT': article.publishedAt,
+      }));
+
+      return {
+        status: 'success',
+        data: articles,
+      };
+    } catch (error) {
+      return {
+        status: 'error',
+        message: error.message,
+      };
+    }
   }
 }
