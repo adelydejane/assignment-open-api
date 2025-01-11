@@ -14,7 +14,7 @@ export class ApiService {
     const params = {
       apiKey: this.apiKey,
       language: 'en',
-      country: query.country || 'ph', // Default to 'ph' if not provided
+      country: query.country || 'ph', 
     };
 
     return this.httpService

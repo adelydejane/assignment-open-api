@@ -1,23 +1,19 @@
 import { Controller, Get } from '@nestjs/common';
 import axios from 'axios';
 
-@Controller('api')
+@Controller('api') 
 export class AppController {
-  @Get('headlines')
+  @Get('headlines') 
   async getHeadlines() {
     try {
-      const response = await axios.get(
-        'https://gnews.io/api/v4/top-headlines', // GNews API endpoint
-        {
-          params: {
-            token: '2d504ef974176296de39be6496a611e2', // Your GNews API key
-            lang: 'en', // Language preference
-            country: 'ph', // Mandatory: News from the Philippines
-          },
+      const response = await axios.get('https://gnews.io/api/v4/top-headlines', {
+        params: {
+          apikey: '2d504ef974176296de39be6496a611e2', 
+          lang: 'en',
+          country: 'ph',
         },
-      );
+      });
 
-      // Extract articles from the response
       const articles = response.data.articles.map((article: any) => ({
         TITLE: article.title,
         DESCRIPTION: article.description,

@@ -5,8 +5,7 @@ import { firstValueFrom } from 'rxjs';
 @Injectable()
 export class GnewsService {
   private readonly API_URL = 'https://gnews.io/api/v4';
-  private readonly API_KEY = '2d504ef974176296de39be6496a611e2'; // Replace with your actual API key
-
+  private readonly API_KEY = '2d504ef974176296de39be6496a611e2'; 
   constructor(private readonly httpService: HttpService) {}
 
   async getTopHeadlines(): Promise<any> {
